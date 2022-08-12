@@ -8,6 +8,16 @@
 	import MenuItem from "$lib/ui/inputs/MenuItem.svelte";
 	import CheckBox from "$lib/ui/inputs/CheckBox.svelte";
 	import Stepper from "$lib/stepper.svelte";
+	import Table from "$lib/table.svelte";
+	import TableData from "$lib/tableData.svelte";
+	import TableHead from "$lib/tableHead.svelte";
+	import TableRow	from "$lib/tableRow.svelte";
+	import TableCell from "$lib/tableCell.svelte";
+	import TableHeaderCell from "$lib/tableHeaderCell.svelte";
+	import TableBody from "$lib/tableBody.svelte";
+	import Map from "$lib/map.svelte"
+
+
 </script>
 
 <div>
@@ -96,11 +106,58 @@
 			</Select>
 		</div>
 	</Paper>
-</Container>
-<Container>
 	<Paper>
 		<Stepper />
 	</Paper>
+
+	<Table>
+		<TableHead>
+			<TableRow>
+				<TableHeaderCell caption="Code" />
+				<TableHeaderCell caption="Company" />
+				<TableHeaderCell caption="Price" />
+				<TableHeaderCell caption="Change" />
+				<TableHeaderCell caption="Change" />
+			</TableRow>
+		</TableHead>
+		<TableBody>
+			<TableRow>
+				<TableCell caption="Code" />
+				<TableCell caption="Company" />
+				<TableCell caption="Price" />
+				<TableCell caption="Change" />
+				<TableCell caption="Change" />
+			</TableRow>
+			<TableRow>
+				<TableCell caption="Code" />
+				<TableCell caption="Company" />
+				<TableCell caption="Price" />
+				<TableCell caption="Change" />
+				<TableCell caption="Change" />
+			</TableRow>
+			<TableRow>
+				<TableCell caption="Code" />
+				<TableCell caption="Company" />
+				<TableCell caption="Price" />
+				<TableCell caption="Change" />
+				<TableCell caption="Change" />
+			</TableRow>
+			<TableRow>
+				<TableCell caption="Code" />
+				<TableCell caption="Company" />
+				<TableCell caption="Price" />
+				<TableCell caption="Change" />
+				<TableCell caption="Change" />
+			</TableRow>
+		</TableBody>
+
+	</Table>
+	<TableData />
+
+	<Paper>
+		<Map />
+	</Paper>
+
 </Container>
 </div>
 

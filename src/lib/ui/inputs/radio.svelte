@@ -16,7 +16,7 @@
 </script>
 
 
-<label class="fui-radio my-4">
+<label class="fui-radio my-4 mx-2">
     <input 
     bind:group={selected}
     value={value}

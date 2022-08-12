@@ -10,8 +10,11 @@
 
 	let mode ='uno';	
 	let radioValue = 'uno';
-	let applicant;
+	let applicant='';
 	let corpo;
+	let indi;
+	let addOption='';
+	let selectAdd;
 	
 	const tracking="WX-923123231"
 
@@ -26,26 +29,39 @@
 
 {#if mode === 'uno'}
 <Page title="Applicant" subtitle="Enter Applicantion Info" {tracking}>
-	<Select placeholder="Type of Applicant" width="full">
+	<Select placeholder="Type of Applicant" width="full" >
 		<MenuItem value="2" label="Individual"/>
 		<MenuItem value="3" label="Corporation"/>
 		<MenuItem value="3" label="Others"/>
 	</Select>
 
-	{#if  applicant == corpo}
-	<Textfield placeholder="Name"/>
-	<p class="font-bold px-2">Administrator</p>
-	{/if}
+	{#if  applicant === indi}
 	<div>
 		<Textfield placeholder="Last Name" />
 		<Textfield placeholder="First Name" />
 		<Textfield placeholder="Middle Name" />
 		<Textfield placeholder="Email" />
 		<Textfield placeholder="Mobile No." />
-		<p>Address</p>
+	</div>
+	{/if}
+	{#if  applicant === corpo}
+	<Textfield placeholder="Name"/>
+	<p class="font-bold px-2">Administrator</p>
+	<div>
+		<Textfield placeholder="Last Name" />
+		<Textfield placeholder="First Name" />
+		<Textfield placeholder="Middle Name" />
+		<Textfield placeholder="Email" />
+		<Textfield placeholder="Mobile No." />>
+	</div>
+	{/if}
+	{#if  addOption === selectAdd}
+	<p class="font-bold px-2">Address</p>
+	<div class="flex">
 		<Radio label="Resident" value="resident" />
 		<Radio label="Non-Resident" value="nonresident" />
 	</div>
+	{/if}
 	<hr class="mt-10 mb-5 "/>
 	<div>
 		<Button on:click={()=> mode='dose'} caption="Submit" variant="contained" color="primary"/>

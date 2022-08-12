@@ -37,7 +37,10 @@
 		orgType = '';
 		mode = 'org';
 	};
-	
+	const onTracking = () => {
+		mode = 'tracking';
+		orgType = '';
+	};	
 	
 
 
@@ -93,7 +96,7 @@
 		<hr class="mt-10 mb-5 "/>
 		<ActionBar>
 			<Button on:click={onBackOrgType} caption="Back" variant="text"/>
-			<Button on:click={()=> mode='terms'} caption="Submit" variant="contained" color="primary"/>
+			<Button on:click={()=> orgType='terms'} caption="Submit" variant="contained" color="primary"/>
 		</ActionBar>
 	</Page>
 {/if}
@@ -119,7 +122,7 @@
 		<Textfield placeholder="Enter Business Name"/>
 		<Textfield placeholder="Enter Trade Name"/>
 		<Textfield placeholder="CDA  Reg No"/>
-		<Textfield placeholder="DTI Date Issued"/>
+		<Textfield placeholder="Date Issued"/>
 		<hr class="mt-10 mb-5 "/>
 		<ActionBar>
 			<Button on:click={onBackOrgType} caption="Back" variant="text"/>
@@ -134,12 +137,12 @@
 	<hr class="mt-10 mb-5 "/>
 	<ActionBar>
 		<Button on:click={onBackOrgType} caption="Back" variant="text"/>
-		<Button on:click={()=> mode='track'} caption="Submit" variant="contained" color="primary"/>
+		<Button on:click={onTracking} caption="Submit" variant="contained" color="primary"/>
 	</ActionBar>
 </ReUse>
 {/if}
 
-{#if mode === 'track'}
+{#if mode === 'tracking'}
 <ReUse  title="Apply New Business" subtitle="Tracking No" text="Your tracking number for this application has been created. Please keep this number for reference for this application." tracking="WX-923123231">
 	<hr class="mt-10 mb-5 "/>
 	<ActionBar>
