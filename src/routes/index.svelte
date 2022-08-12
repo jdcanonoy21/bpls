@@ -15,7 +15,8 @@
 	import TableCell from "$lib/tableCell.svelte";
 	import TableHeaderCell from "$lib/tableHeaderCell.svelte";
 	import TableBody from "$lib/tableBody.svelte";
-	import Map from "$lib/map.svelte"
+	import Map from "$lib/map.svelte";
+	import 'leaflet/dist/leaflet.css';
 
 
 </script>

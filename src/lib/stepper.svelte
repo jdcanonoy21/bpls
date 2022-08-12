@@ -24,13 +24,11 @@
     <li><div class:divider={idx}></div></li>
     <li on:click={() => activeStep=idx+1}>
       <div 
-        
         class="node bg-blue-600" 
         class:inactive={idx+1 > currentStep}
         class:active={idx+1 === activeStep}
         > {idx+1} </div><p>{step.title}</p>
     </li>
-    
   {/each}
 </ul>
 
