@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { onMount } from 'svelte';
 
     let map;
@@ -34,4 +34,4 @@
     }
 </style>
 
-<div id="map" />
+<div id="map" /> -->

@@ -28,7 +28,7 @@
 
 
 {#if mode === 'uno'}
-<Page title="Applicant" subtitle="Enter Applicantion Info" {tracking}>
+<Page title="Applicant" subtitle="Enter Application Info" {tracking}>
 	<Select placeholder="Type of Applicant" width="full" >
 		<MenuItem value="2" label="Individual"/>
 		<MenuItem value="3" label="Corporation"/>

@@ -15,7 +15,6 @@
 	import TableCell from "$lib/tableCell.svelte";
 	import TableHeaderCell from "$lib/tableHeaderCell.svelte";
 	import TableBody from "$lib/tableBody.svelte";
-	import Map from "$lib/map.svelte";
 
 	const items = [
 		{code:'1234', company:'rameses', price:1234},
@@ -134,7 +133,7 @@
 		{/each}
 		</TableBody>
 	</Table>
-	<Map />
+	
 
 	
 
