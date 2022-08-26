@@ -1,8 +1,8 @@
 <script>
-    export let caption="";
+    export let value="";
 </script>
 <td>
-    {caption}
+    {value}
 </td>
 
 <style>
@@ -11,9 +11,7 @@
         text-align: left;
         vertical-align:middle;
         font-weight: 300;
-        font-size: 12px;
         color: #000;
         border-bottom: solid 1px #cfcfcf
     }
-
 </style>

@@ -16,7 +16,14 @@
 	import TableHeaderCell from "$lib/tableHeaderCell.svelte";
 	import TableBody from "$lib/tableBody.svelte";
 	import Map from "$lib/map.svelte";
-	import 'leaflet/dist/leaflet.css';
+
+	const items = [
+		{code:'1234', company:'rameses', price:1234},
+		{code:'1234', company:'rameses1', price:1234},
+		{code:'1234', company:'ramese2', price:1234}
+
+	];
+
 
 
 </script>
@@ -63,8 +70,8 @@
 		<h1 class="mb-6 border-b-2 text-2xl pl-4">Basic Radio</h1>
 		<div class="mb-8 pl-4 pb-4">
 			<div class="flex mb-9">
-				<Radio checked/>
-				<Radio />
+				<Radio name="app" checked/>
+				<Radio name="app" />
 				<Radio disabled checked/>
 				<Radio disabled/>
 			</div>
@@ -111,53 +118,25 @@
 		<Stepper />
 	</Paper>
 
-	<Table>
+	<Table multiSelect={true}>
 		<TableHead>
-			<TableRow>
-				<TableHeaderCell caption="Code" />
-				<TableHeaderCell caption="Company" />
-				<TableHeaderCell caption="Price" />
-				<TableHeaderCell caption="Change" />
-				<TableHeaderCell caption="Change" />
-			</TableRow>
+			<TableHeaderCell caption="Code" />
+			<TableHeaderCell caption="Company" />
+			<TableHeaderCell caption="Price" />
 		</TableHead>
 		<TableBody>
+		{#each items as item}
 			<TableRow>
-				<TableCell caption="Code" />
-				<TableCell caption="Company" />
-				<TableCell caption="Price" />
-				<TableCell caption="Change" />
-				<TableCell caption="Change" />
+				<TableCell value={item.code} />
+				<TableCell value={item.company} />
+				<TableCell value={item.price} />
 			</TableRow>
-			<TableRow>
-				<TableCell caption="Code" />
-				<TableCell caption="Company" />
-				<TableCell caption="Price" />
-				<TableCell caption="Change" />
-				<TableCell caption="Change" />
-			</TableRow>
-			<TableRow>
-				<TableCell caption="Code" />
-				<TableCell caption="Company" />
-				<TableCell caption="Price" />
-				<TableCell caption="Change" />
-				<TableCell caption="Change" />
-			</TableRow>
-			<TableRow>
-				<TableCell caption="Code" />
-				<TableCell caption="Company" />
-				<TableCell caption="Price" />
-				<TableCell caption="Change" />
-				<TableCell caption="Change" />
-			</TableRow>
+		{/each}
 		</TableBody>
-
 	</Table>
-	<TableData />
+	<Map />
 
-	<Paper>
-		<Map />
-	</Paper>
+	
 
 </Container>
 </div>

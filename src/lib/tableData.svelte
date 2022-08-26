@@ -1,14 +1,17 @@
 <script>
-    export let tests=[
-        {rows:[
-            {one:'one'},
-            {two:'two'}
-        ]}
-    ];
+   export let thead =[
+    {name:'Company'},
+    {name:'price'},
+    {name:'change'},
+    {name:'percent'}
+  ];
+   export let table = [
+    {name:'yeah',price:4545,change:2121,percent:23},
+    {name:'yeah2',price:98989,change:2121,percent:30}
+  ];
+	
+  export let activeRow = 4;
 
-    let rows={};
-    let col;
-  
 </script>
 
 <div class="m-10">
@@ -16,11 +19,10 @@
         <table>
         <thead>
             <tr>
-            <th><input type="checkbox"/></th>
-            <th>Company</th>
-            <th>Price</th>
-            <th>Change</th>
-            <th>Change %</th>
+              <th><input type="checkbox"/></th>
+              {#each thead as item}
+                <th>{item.name}</th>
+              {/each}
             </tr>
         </thead>
         </table>
@@ -28,16 +30,18 @@
     <div class="tbl-content">
         <table>
             <tbody>
-                {#each tests as test}
-                <tr>
-                    <td><input type="checkbox"/></td>
-                    <td>{test.rows}</td>
-                </tr>
+                {#each table as item, idx}
+                  <tr on:click={() => activeRow}>
+                      <td><input type="checkbox" /></td>
+                      <td>{item.name}</td>
+                      <td>{item.price}</td>
+                      <td>{item.change}</td>
+                      <td>{item.percent}</td>
+                  </tr>
                 {/each}
             </tbody>
         </table>
     </div>
-
 </div>
 
 <style>
@@ -101,6 +105,10 @@ thead > tr > th:first-child{
 }
 thead > tr > th:last-child{
     border-top-right-radius: 10px;
+}
+.activeRow{
+  background-color: red;;
+  text-transform: uppercase;
 }
 
 </style>

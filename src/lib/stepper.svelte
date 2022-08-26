@@ -42,7 +42,7 @@
     display:inline-block;
     transition: all 1000ms ease;
     color:#fff;
-    padding: 10px 0px 0px 7px;
+    padding: 10px 0px 0px 8px;
     font-size: 12px;
 }
 
