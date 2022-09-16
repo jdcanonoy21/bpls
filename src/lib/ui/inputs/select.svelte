@@ -16,7 +16,7 @@
 >
   <select
     bind:value
-    class="select-text w-full appearance-none -webkit-appearance-none relative bg-transparent pt-2.5 pb-2.5 pr-2.5 pl-0 border-0 text-lg focus:outline-0 "
+    class="select-text w-full appearance-none -webkit-appearance-none relative bg-transparent pt-2.5 pb-2.5 pr-2.5 pl-0 -webkit-border-0 text-lg -webkit-focus:outline-0 "
     required
   >
     {#if placeholder}
@@ -35,18 +35,19 @@
 </div>
 
 <style>
+
   .select-text {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
   .select-text:focus {
     border-bottom: 1px solid rgba(0, 0, 0, 0);
   }
-  .select:after {
+  /* .select:after {
     content: "";
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid rgba(0, 0, 0, 0.12);
-  }
+  } */
   .select-label {
     color: rgba(0, 0, 0, 0.54);
     transition: 0.2s ease all;
