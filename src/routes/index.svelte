@@ -18,7 +18,7 @@
 	import LinearProgress from '$lib/ui/linear.svelte';
 	import SearchBar from '$lib/ui/inputs/searchBar.svelte';
 	import CircularProgress from '$lib/ui/circular.svelte';
-	import Map from '$lib/ui/map/map.svelte';
+	import Map from '$lib/ui/map/Map.svelte';
 
 	const items = [
 		{ code: '1234', company: 'rameses', price: 1234 },

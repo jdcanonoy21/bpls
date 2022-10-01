@@ -2,130 +2,60 @@
 	import { onMount } from 'svelte';
 	import maplibregl, { NavigationControl } from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
-	import ClearMarkers from '$lib/ui/map/clear-markers.js';
+	import { ClearMarkers, mapOptions, loadBuiltinControls } from '$lib/ui/map/map.js';
 
 	export let lng = 123.8854;
 	export let lat = 10.316;
-	export let zoom = 10;
+	export let geolocation = { lng, lat, markers: [] };
+	export let zoom = 15;
 	export let pitch = 0;
 	export let bearing = 0;
 	export let singleMarker = true;
 	export let markerInfo = 'McDonalds';
-	export let markers = [];
+	export let mapHeight = 100;
+	export let viewOnly = false;
 
-	$: center = [lng, lat];
+	$: center = [geolocation.lng, geolocation.lat];
+
+	const addMarker = (marker) => {
+		geolocation.markers = geolocation.markers.concat(marker);
+	};
 
 	const clearMarkers = () => {
-		markers.splice(0, markers.length);
+		geolocation.markers = [];
+	};
+
+	const loadMarkers = (map, options = { viewOnly: true }) => {
+		geolocation.markers.forEach(({ info, lnglat }) => {
+			const newMarker = new maplibregl.Marker({ draggable: !viewOnly })
+				.setLngLat(lnglat)
+				.addTo(map);
+			if (info) {
+				const html = markerInfo ? `<p>${info}</p>` : '';
+				newMarker.setPopup(new maplibregl.Popup().setHTML(html));
+			}
+			map.markers.push(newMarker);
+		});
 	};
 
 	onMount(() => {
-		const lnglat = document.getElementById('coordinates');
+		mapOptions.center = center;
+		mapOptions.zoom = zoom;
+		mapOptions.pitch = pitch;
+		mapOptions.bearing = bearing;
 
-		var map = new maplibregl.Map({
-			container: 'map',
-			style: {
-				version: 8,
-				name: 'Blank',
-				center: [0, 0],
-				zoom: 0,
-				sources: {
-					'raster-tiles': {
-						type: 'raster',
-						tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-						tileSize: 256,
-						minzoom: 5,
-						maxzoom: 30
-					}
-				},
-				layers: [
-					{
-						id: 'background',
-						type: 'background',
-						paint: {
-							'background-color': '#e0dfdf'
-						}
-					},
-					{
-						id: 'simple-tiles',
-						type: 'raster',
-						source: 'raster-tiles'
-					}
-				]
-			},
-			center: center,
-			zoom: zoom,
-			pitch: pitch,
-			bearing: bearing,
-			antialias: true
-		});
+		var map = new maplibregl.Map(mapOptions);
+		map.markers = [];
 
-		const geocoder_api = {
-			// @ts-ignore
-			forwardGeocode: async (config) => {
-				const features = [];
-				try {
-					let request =
-						'https://nominatim.openstreetmap.org/search?q=' +
-						config.query +
-						'&format=geojson&polygon_geojson=1&addressdetails=1';
-					const response = await fetch(request);
-					const geojson = await response.json();
-					for (let feature of geojson.features) {
-						let center = [
-							feature.bbox[0] + (feature.bbox[2] - feature.bbox[0]) / 2,
-							feature.bbox[1] + (feature.bbox[3] - feature.bbox[1]) / 2
-						];
-						let point = {
-							type: 'Feature',
-							geometry: {
-								type: 'Point',
-								coordinates: center
-							},
-							place_name: feature.properties.display_name,
-							properties: feature.properties,
-							text: feature.properties.display_name,
-							place_type: ['place'],
-							center: center
-						};
-						features.push(point);
-					}
-				} catch (e) {
-					console.error(`Failed to forwardGeocode with error: ${e}`);
-				}
+		loadMarkers(map, { viewOnly });
+		loadBuiltinControls(map);
 
-				return {
-					features: features
-				};
-			}
-		};
-
-		map.addControl(
-			// @ts-ignore
-			new MaplibreGeocoder(geocoder_api, {
-				maplibregl: maplibregl,
-				marker: false,
-				draggable: true
-			}),
-			'top-left'
-		);
-
-		// @ts-ignore
-		map.addControl(new NavigationControl(), 'top-right');
-
-		map.addControl(
-			new maplibregl.GeolocateControl({
-				positionOptions: {
-					enableHighAccuracy: true
-				},
-				trackUserLocation: true
-			})
-		);
-
-		map.addControl(new ClearMarkers(markers, clearMarkers));
+		if (!viewOnly) {
+			map.addControl(new ClearMarkers(clearMarkers));
+		}
 
 		map.on('click', (e) => {
-			if (singleMarker && markers.length === 1) return;
+			if (singleMarker && geolocation.markers.length === 1) return;
 
 			const lnglat = e.lngLat;
 			const marker = new maplibregl.Marker({ draggable: true }).setLngLat(lnglat).addTo(map);
@@ -133,12 +63,13 @@
 				const html = markerInfo ? `<p>${markerInfo}</p>` : '';
 				marker.setPopup(new maplibregl.Popup().setHTML(html));
 			}
-			markers.push(marker);
+			map.markers.push(marker);
+			addMarker(marker);
 		});
 	});
 </script>
 
-<div class="map">
+<div class="map" style="height: {mapHeight}vh;">
 	<div id="map" class="map__surface" />
 	<div id="map__coordinates" class="coordinates" />
 </div>
